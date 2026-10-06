@@ -1,10 +1,12 @@
 cff-version: 1.2.0
 message: "Please cite the source UCI dataset and describe this exploratory research package when reusing it."
-title: "Simulated measurement and feedback delays in PM2.5 interval forecasting: an exploratory Beijing benchmark"
+title: "Beijing PM2.5 delayed-feedback benchmark: frozen analysis code v0.3.0"
 type: software
 authors:
   - family-names: "Quispe Vargas"
     given-names: "Renato"
     affiliation: "Universidad Nacional del Altiplano"
-version: "0.2.0"
+version: "0.3.0"
 license: MIT
+doi: "10.5281/zenodo.23171630"
+repository-code: "https://github.com/rntvargas/beijing-pm25-delayed-feedback"

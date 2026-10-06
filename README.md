@@ -12,18 +12,22 @@ Hourly UCI Beijing multi-site data, 12 stations, 2013–2017; 24-hour forecasts;
 The initial fixed-predictor comparison is preserved. A separately documented **post-review exploratory extension** adds:
 - delay-adapted model selection and training with arrival-purged responses;
 - raw conditional quantile intervals and conformalized quantile regression (CQR);
-- daily delayed-feedback projected ACI (explicit batching/projection modifications; no original-ACI theorem claimed);
+- ACI-inspired daily delayed-feedback heuristic (ADH) (explicit batching/projection modifications; no original-ACI theorem claimed);
 - pooled, station-specific and equal-station-weight calibration;
 - coverage and paired-difference block-bootstrap intervals, subgroup simultaneous bands;
 - missingness, concentration strata, score distributions and hypothetical loss sensitivity;
 - a second, earlier Beijing temporal backtest, not independent external validation;
 - arrival ledgers and independent numerical verification in R.
 
-At 72 hours and 90% nominal level, original rolling calibration has coverage 88.32% and interval score 328.01. Exploratory CQR has coverage 88.91% and score 258.40; projected delayed ACI has coverage 89.78% and score 317.48. The additional comparisons use a previously examined test set and are not confirmatory. No uniform superiority or deployment suitability is established.
+At 72 hours and 90% nominal level, original rolling calibration has coverage 88.32% and interval score 328.01. Exploratory CQR has coverage 88.91% and score 258.40; ADH has coverage 89.78% and score 317.48. The additional comparisons use a previously examined test set and are not confirmatory. No uniform superiority or deployment suitability is established.
 
 Repository: https://github.com/rntvargas/beijing-pm25-delayed-feedback
 
-Full research release: https://github.com/rntvargas/beijing-pm25-delayed-feedback/releases/tag/v0.2.0
+Full research release: https://github.com/rntvargas/beijing-pm25-delayed-feedback/releases/tag/v0.3.0
+
+## Version 0.3.0 methodological revision
+
+Exact CQR equations and reconstruction audit, ADH terminology, 267 paired-score contrast intervals from 10,000 day-block replicates, and visually separated P/E/S evidence categories. P is local prespecification, not independent confirmation; E is post-review exploration; S is sensitivity. See `METHOD_SPECIFICATION.md` and `exploratory_score_contrasts.csv`.
 
 ## Files and reproducibility
 
@@ -40,6 +44,8 @@ python outputs/03_experimento/experimento.py --stage final
 python outputs/05_revision/revision.py
 python outputs/05_revision/segundo_periodo.py
 python outputs/05_revision/diagnosticos.py
+python outputs/05_revision/bootstrap_exploratorio.py
+python outputs/05_revision/verificar_cqr.py
 python outputs/05_revision/verificar_tiempos.py
 Rscript outputs/05_revision/verificar_revision.R outputs/05_revision
 tectonic outputs/04_manuscrito_springer/manuscript.tex
@@ -59,7 +65,7 @@ Original analysis code: MIT (see LICENSE). Data retain CC BY 4.0. Springer templ
 
 R independently reproduced all 68 extension interval-summary rows within 1e-8. Timing checks independently reproduced 90 daily quantiles, checked all residual event ledgers and verified invariance to perturbing unavailable responses. These checks establish implementation consistency, not correctness of every scientific assumption.
 
-Intervals are evaluated only for naturally observed targets. No missing-at-random mechanism is established; no population correction is claimed. Bootstrap inference conditions on fitted models and is sensitive to block size and nonstationarity. The data cover one city; the earlier temporal sensitivity overlaps the study history. Public archiving with a persistent DOI remains pending: **a GitHub URL is not a DOI**.
+Intervals are evaluated only for naturally observed targets. No missing-at-random mechanism is established; no population correction is claimed. Bootstrap inference conditions on fitted models and is sensitive to block size and nonstationarity. The data cover one city; the earlier temporal sensitivity overlaps the study history. Frozen original analysis code: **https://doi.org/10.5281/zenodo.23171630**, version 0.3.0. This code DOI excludes the manuscript and data/model archive; it is not an article DOI. SHA256 checksums identify the archived source files.
 
 ## AI assistance
 
