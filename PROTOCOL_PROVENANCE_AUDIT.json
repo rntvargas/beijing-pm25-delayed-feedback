@@ -1,0 +1,97 @@
+{
+  "status": "local chronology and public-version equality audited",
+  "protocol_sha256": "78c518b2081dc77d4e987595b3fff99aea27958f8e40bb326da86b0e61131af4",
+  "events": [
+    {
+      "event": "local protocol write request",
+      "utc": "2026-10-03T01:12:34.531Z",
+      "initial_payload_sha256": "78c518b2081dc77d4e987595b3fff99aea27958f8e40bb326da86b0e61131af4"
+    },
+    {
+      "event": "first recorded final-test command",
+      "utc": "2026-10-03T01:15:49.776Z",
+      "command": "python outputs/03_experimento/experimento.py --stage final"
+    }
+  ],
+  "local_filesystem_utc": {
+    "protocol_creation": "2026-10-03T01:12:39.1505342Z",
+    "selection_written": "2026-10-03T01:15:19.6009483Z",
+    "original_primary_table_written": "2026-10-03T01:17:08.2118407Z",
+    "final_run_manifest_written": "2026-10-03T01:17:08.5461841Z"
+  },
+  "historical_public_version_checks": [
+    {
+      "tag": "v0.2.0",
+      "file": "outputs/03_experimento/PROTOCOLO.md",
+      "sha256": "78c518b2081dc77d4e987595b3fff99aea27958f8e40bb326da86b0e61131af4",
+      "identical_to_current": true
+    },
+    {
+      "tag": "v0.2.0",
+      "file": "outputs/03_experimento/selection.json",
+      "sha256": "5817aae6eb77e9866f768830588fdbc5a3f220b4912f8703d6d85271b1240df2",
+      "identical_to_current": true
+    },
+    {
+      "tag": "v0.2.0",
+      "file": "outputs/03_experimento/RUN_MANIFEST.json",
+      "sha256": "ab67c6cfce117cfad136267fc2776248763ff5aa25ccba3028bc28fd4fce0fb6",
+      "identical_to_current": true
+    },
+    {
+      "tag": "v0.2.0",
+      "file": "outputs/03_experimento/tables/interval_metrics.csv",
+      "sha256": "e7c480aafb04044985a0fb202747e471d729173c2582e326ea7e6e5993e09989",
+      "identical_to_current": true
+    },
+    {
+      "tag": "v0.2.0",
+      "file": "outputs/03_experimento/tables/primary_bootstrap.csv",
+      "sha256": "9d51ba8d0e2c9beeb1b742b4037e0fa3d028556626325293461c61cdeb503b54",
+      "identical_to_current": true
+    },
+    {
+      "tag": "v0.2.0",
+      "file": "outputs/03_experimento/tables/primary_daily_paired_differences.csv",
+      "sha256": "d3f063c8f2faae7dc1208de0e3721e0cd9df7a39ba6da936d86418cbc4d07476",
+      "identical_to_current": true
+    },
+    {
+      "tag": "v0.3.0",
+      "file": "outputs/03_experimento/PROTOCOLO.md",
+      "sha256": "78c518b2081dc77d4e987595b3fff99aea27958f8e40bb326da86b0e61131af4",
+      "identical_to_current": true
+    },
+    {
+      "tag": "v0.3.0",
+      "file": "outputs/03_experimento/selection.json",
+      "sha256": "5817aae6eb77e9866f768830588fdbc5a3f220b4912f8703d6d85271b1240df2",
+      "identical_to_current": true
+    },
+    {
+      "tag": "v0.3.0",
+      "file": "outputs/03_experimento/RUN_MANIFEST.json",
+      "sha256": "ab67c6cfce117cfad136267fc2776248763ff5aa25ccba3028bc28fd4fce0fb6",
+      "identical_to_current": true
+    },
+    {
+      "tag": "v0.3.0",
+      "file": "outputs/03_experimento/tables/interval_metrics.csv",
+      "sha256": "e7c480aafb04044985a0fb202747e471d729173c2582e326ea7e6e5993e09989",
+      "identical_to_current": true
+    },
+    {
+      "tag": "v0.3.0",
+      "file": "outputs/03_experimento/tables/primary_bootstrap.csv",
+      "sha256": "9d51ba8d0e2c9beeb1b742b4037e0fa3d028556626325293461c61cdeb503b54",
+      "identical_to_current": true
+    },
+    {
+      "tag": "v0.3.0",
+      "file": "outputs/03_experimento/tables/primary_daily_paired_differences.csv",
+      "sha256": "d3f063c8f2faae7dc1208de0e3721e0cd9df7a39ba6da936d86418cbc4d07476",
+      "identical_to_current": true
+    }
+  ],
+  "limitations": "Local logs and filesystem timestamps are mutable and are not an independent timestamp authority. First recorded command is not proof of the absence of earlier unrecorded calculations. Public-version comparisons establish equality to published snapshots, not global proof of no intermediate edits."
+}

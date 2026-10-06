@@ -23,11 +23,17 @@ At 72 hours and 90% nominal level, original rolling calibration has coverage 88.
 
 Repository: https://github.com/rntvargas/beijing-pm25-delayed-feedback
 
-Full research release: https://github.com/rntvargas/beijing-pm25-delayed-feedback/releases/tag/v0.3.0
+Full research release: https://github.com/rntvargas/beijing-pm25-delayed-feedback/releases/tag/v0.3.1
 
 ## Version 0.3.0 methodological revision
 
 Exact CQR equations and reconstruction audit, ADH terminology, 267 paired-score contrast intervals from 10,000 day-block replicates, and visually separated P/E/S evidence categories. P is local prespecification, not independent confirmation; E is post-review exploration; S is sensitivity. See `METHOD_SPECIFICATION.md` and `exploratory_score_contrasts.csv`.
+
+## Editorial revision 0.3.1
+
+The 24-page Springer-format draft retains 31 references with DOI links. The sample audit verifies 101,012 common CQR calibration responses at every delay, 20 quantile learners and ten interval configurations. Added coverage intervals, pointwise-inference warnings, exact bootstrap implementation details, a protocol chronology with explicit provenance limitations, and separate primary/exploratory objectives address the latest review. See `RESPUESTA_REVISION_V031.md`, `cqr_sample_and_features_audit.csv` and `PROTOCOL_PROVENANCE_AUDIT.json`.
+
+The fitted models, prediction files, scientific analysis scripts and numerical results are unchanged. The additional `outputs/05_revision/auditar_muestra_cqr.py` is an editorial audit helper; it is not part of the frozen v0.3.0 code DOI. Zenodo archives code and documentation only. The full data/model/prediction/manuscript package is a GitHub release asset. Author declarations and personal scientific review remain pending; this is not a submission-ready or accepted article.
 
 ## Files and reproducibility
 
@@ -46,6 +52,7 @@ python outputs/05_revision/segundo_periodo.py
 python outputs/05_revision/diagnosticos.py
 python outputs/05_revision/bootstrap_exploratorio.py
 python outputs/05_revision/verificar_cqr.py
+python outputs/05_revision/auditar_muestra_cqr.py
 python outputs/05_revision/verificar_tiempos.py
 Rscript outputs/05_revision/verificar_revision.R outputs/05_revision
 tectonic outputs/04_manuscrito_springer/manuscript.tex
