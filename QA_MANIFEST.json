@@ -1,0 +1,16 @@
+{
+  "pdf_pages": 28,
+  "bibliography_doi_count": 31,
+  "all_doi_destinations_present": true,
+  "uri_annotations": 40,
+  "destinations_with_whitespace": 0,
+  "frozen_scientific_code_unchanged": true,
+  "factorial_R_rows": 60,
+  "R_max_error": 2.8421709430403997e-13,
+  "fixed_cells_checked": 30,
+  "optimized_combinations_checked": 16,
+  "alphabetical_metrics_max_error": 5.684341886080802e-14,
+  "random_assignments": 40,
+  "balanced_assignments": true,
+  "visual_qa": "All 28 pages inspected; equations, tables, figures and DOI identifiers legible; no text overflow."
+}

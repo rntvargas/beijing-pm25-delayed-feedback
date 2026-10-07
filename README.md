@@ -1,48 +1,31 @@
-# Beijing PM2.5: delayed measurements and delayed feedback
+# Beijing PM2.5 delayed-feedback benchmark
 
-Research benchmark by **Renato Quispe Vargas**, Universidad Nacional del Altiplano.
+Renato Quispe Vargas, Universidad Nacional del Altiplano. Correspondence: rntvargasvav@gmail.com.
 
-**Status: exploratory research manuscript under author review, not an accepted article.**
-No new conformal algorithm or distribution-free guarantee is claimed. Funding, competing interests, CRediT contributions and correspondence details await author confirmation.
+Research revision **v0.4.0**: https://github.com/rntvargas/beijing-pm25-delayed-feedback/releases/tag/v0.4.0
 
-## What is evaluated
+The 28-page Springer-format manuscript contains 31 DOI-linked references. It is an exploratory research manuscript, not a submitted or accepted article. The author confirmed review of the preceding version, no funding and no competing interests. The new factorial and sensitivity results require author review before submission.
 
-Hourly UCI Beijing multi-site data, 12 stations, 2013–2017; 24-hour forecasts; simulated PM2.5 delays of 0, 6, 24, 72 and 168 hours. Other measured channels remain available with their natural missingness. A station-heterogeneous delay sensitivity is also included. These are synthetic delivery scenarios, not measured network latencies.
+## What changed
 
-The initial fixed-predictor comparison is preserved. A separately documented **post-review exploratory extension** adds:
-- delay-adapted model selection and training with arrival-purged responses;
-- raw conditional quantile intervals and conformalized quantile regression (CQR);
-- ACI-inspired daily delayed-feedback heuristic (ADH) (explicit batching/projection modifications; no original-ACI theorem claimed);
-- pooled, station-specific and equal-station-weight calibration;
-- coverage and paired-difference block-bootstrap intervals, subgroup simultaneous bands;
-- missingness, concentration strata, score distributions and hypothetical loss sensitivity;
-- a second, earlier Beijing temporal backtest, not independent external validation;
-- arrival ledgers and independent numerical verification in R.
+- A 2 x 3 predictor/calibrator factorial across five delays and two nominal levels: 60 configurations, using saved fixed and delay-adapted predictors with static delay-matched calibration, rolling global calibration and ADH. No refitting or selection on test results.
+- 270 paired score-contrast rows from 10000 circular day-block replicates at 7/14/28 days; within-predictor, within-calibrator and interaction contrasts. Pointwise, conditional-on-fit, no multiplicity adjustment.
+- 40 random balanced station-delay assignments (three stations each at 6/24/72/168 h), with mappings and assignment dispersion.
+- Exact coverage counts/disagreement sets and calibration/test distribution diagnostics.
+- Local protocol recorded before execution replaces claims of local prespecification; detailed AI use restored; verification counts and cross-references clarified; DOI display repaired.
 
-At 72 hours and 90% nominal level, original rolling calibration has coverage 88.32% and interval score 328.01. Exploratory CQR has coverage 88.91% and score 258.40; ADH has coverage 89.78% and score 317.48. The additional comparisons use a previously examined test set and are not confirmatory. No uniform superiority or deployment suitability is established.
+At 72 h and 90% nominal, scores for fixed/adapted predictors are 375.39/346.75 under static delay-matched calibration, 328.01/312.66 under rolling, and 317.48/303.20 under ADH. Adapting the predictor under rolling changes score by -15.35, with a 14-day pointwise interval [-24.67,-6.55]. Interaction intervals include zero. CQR remains a whole-pipeline comparator; this factorial does not identify all its component effects.
 
-Repository: https://github.com/rntvargas/beijing-pm25-delayed-feedback
+Global, station-specific and equal-station rolling each cover exactly 90493 of 102465 targets at 72 h/90%. Their membership differs: station pooling gains and loses 1048 cases, equal weighting gains and loses three. Equal marginal counts are not identical predictions.
 
-Full research release: https://github.com/rntvargas/beijing-pm25-delayed-feedback/releases/tag/v0.3.1
+## Reproducibility
 
-## Version 0.3.0 methodological revision
+Download `source_and_tables.zip` from this repository or the full research ZIP from the release. Extract to an empty project directory. The source archive excludes data, fitted models, prediction files and cached arrays; the full archive includes them. Both contain SHA256 manifests.
 
-Exact CQR equations and reconstruction audit, ADH terminology, 267 paired-score contrast intervals from 10,000 day-block replicates, and visually separated P/E/S evidence categories. P is local prespecification, not independent confirmation; E is post-review exploration; S is sensitivity. See `METHOD_SPECIFICATION.md` and `exploratory_score_contrasts.csv`.
-
-## Editorial revision 0.3.1
-
-The 24-page Springer-format draft retains 31 references with DOI links. The sample audit verifies 101,012 common CQR calibration responses at every delay, 20 quantile learners and ten interval configurations. Added coverage intervals, pointwise-inference warnings, exact bootstrap implementation details, a protocol chronology with explicit provenance limitations, and separate primary/exploratory objectives address the latest review. See `RESPUESTA_REVISION_V031.md`, `cqr_sample_and_features_audit.csv` and `PROTOCOL_PROVENANCE_AUDIT.json`.
-
-The fitted models, prediction files, scientific analysis scripts and numerical results are unchanged. The additional `outputs/05_revision/auditar_muestra_cqr.py` is an editorial audit helper; it is not part of the frozen v0.3.0 code DOI. Zenodo archives code and documentation only. The full data/model/prediction/manuscript package is a GitHub release asset. Author declarations and personal scientific review remain pending; this is not a submission-ready or accepted article.
-
-## Files and reproducibility
-
-`source_and_tables.zip` contains the complete directory-preserving source, manuscript and result tables. Extract it into an empty project directory. The accompanying full reproducibility release includes the original data, prepared partitions, fitted models, all predictions and timing ledgers. Each archive includes SHA256 checksums. The source archive is sufficient to regenerate the results after downloading/preparing the data.
-
-Python 3.12.14; R 4.5.2. From the extracted project root:
+Existing scientific scripts, models and numerical results remain unchanged. Additional work is under `outputs/06_factorial`. Python 3.12.14 and R 4.5.2 were used. To regenerate everything from the source archive, first run the original preparation/analysis in order:
 
 ```text
-python -m pip install -r outputs/03_experimento/requirements.txt
+python -m pip install -r outputs/06_factorial/requirements.txt
 python download_data.py
 python outputs/02_datos_estudio/preparar_datos.py
 python outputs/03_experimento/experimento.py --stage development
@@ -55,25 +38,24 @@ python outputs/05_revision/verificar_cqr.py
 python outputs/05_revision/auditar_muestra_cqr.py
 python outputs/05_revision/verificar_tiempos.py
 Rscript outputs/05_revision/verificar_revision.R outputs/05_revision
+python outputs/06_factorial/factorial.py
+Rscript outputs/06_factorial/verify_factorial.R outputs/06_factorial
+python outputs/06_factorial/plot_distributions.py
 tectonic outputs/04_manuscrito_springer/manuscript.tex
 ```
 
-`revision.py` resumes completed delay files. To conduct a clean rerun, use a fresh extraction and avoid mixing result versions. The older model experiment overwrites its own outputs when rerun. The manuscript source is editorially maintained; the original figure generator does not overwrite it.
+With the full archive, the stored models are sufficient to run the last three analysis commands without refitting. For a clean verification of cached point predictions, use a fresh source extraction; `factorial.py` reuses its own completed cache if present. The manuscript is editorially maintained. Only load serialized models from trusted copies.
 
-The notebook-style or GUI use of RStudio/VS Code is optional. Calculations run from scripts; QGIS was not needed for this non-cartographic experiment. Serialized joblib models should only be loaded from trusted copies of this package.
+R recomputed all 60 new metric rows and covered counts (maximum discrepancy <3e-13). All 30 fixed cells reproduce saved interval bounds. The optimized loop matches the previous implementation for 16 heterogeneous method/level/assignment combinations. The alphabetical-assignment metrics match the previous saved results. See `QA_MANIFEST.json` and the supplementary tables.
 
-## Data, licensing and attribution
+## Archives, attribution and limits
 
-Data: Chen (2017), Beijing Multi-Site Air Quality, UCI Machine Learning Repository, DOI https://doi.org/10.24432/C5RK5G, **CC BY 4.0**. Original ZIP SHA256: `b04da438b2f331ac0ffd45aebdfec0d20d2367feb5f6948c4b1f7ce1191e33c4`.
+Data: UCI Beijing Multi-Site Air Quality, https://doi.org/10.24432/C5RK5G (CC BY 4.0). Original analysis code: MIT. Springer files retain their notices; MIT does not relicense the manuscript, data or cited publications.
 
-Original analysis code: MIT (see LICENSE). Data retain CC BY 4.0. Springer template files retain their original notices; the MIT license does not relicense those files or cited publications. Manuscript and generated figures remain research materials under author review; no journal acceptance is implied.
+Frozen code DOI: https://doi.org/10.5281/zenodo.23171630 identifies **software v0.3.0 only**. It does not contain the v0.4.0 factorial extension, data, models, predictions or manuscript. `CITATION.cff` continues to describe that frozen code snapshot; cite the v0.4.0 GitHub release separately when using the new extension. No article DOI is claimed.
 
-## Verification and limitations
-
-R independently reproduced all 68 extension interval-summary rows within 1e-8. Timing checks independently reproduced 90 daily quantiles, checked all residual event ledgers and verified invariance to perturbing unavailable responses. These checks establish implementation consistency, not correctness of every scientific assumption.
-
-Intervals are evaluated only for naturally observed targets. No missing-at-random mechanism is established; no population correction is claimed. Bootstrap inference conditions on fitted models and is sensitive to block size and nonstationarity. The data cover one city; the earlier temporal sensitivity overlaps the study history. Frozen original analysis code: **https://doi.org/10.5281/zenodo.23171630**, version 0.3.0. This code DOI excludes the manuscript and data/model archive; it is not an article DOI. SHA256 checksums identify the archived source files.
+The test set was previously inspected; all additions are exploratory. The earlier Beijing backtest is not independent external validation. Simulated delays, temporal dependence, missing targets, one city and sensitivity to block length limit generalization. No new algorithm, universal coverage guarantee or Q1 acceptance is claimed.
 
 ## AI assistance
 
-OpenAI Codex assisted with searches, design, programming, execution, checking and drafting. Renato Quispe Vargas must review and approve the scientific content before submission; that approval is not asserted by publishing this research package. AI is not an author.
+OpenAI Codex desktop (recorded model gpt-6-astra) assisted during 2–7 October 2026 with literature discovery, design, programming, computational execution and checking, plots and drafting. Computational checks are not independent human reproduction. The author confirmed review and responsibility for the preceding version; the new results need renewed review. See the detailed manuscript declaration and `RESPUESTA_REVISION_V040.md`.
